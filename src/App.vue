@@ -13,27 +13,50 @@
           </div>
           <v-card class="text-center mt-12" flat>
             <i class='bx bx-cloud'></i>
-            <p class="mb-0 text-h6">Cloudy</p>
+            <p class="text-h5 font-weight-medium mb-0">Cloudy</p>
             <p class="grey--text mb-0">Thursday, 09 Nov</p>
-            <p class="mt-3 text-h4 font-weight-medium">-20ºC</p>
+            <p class="mt-3 text-h4 font-weight-regular">-20ºC</p>
           </v-card>
           <v-container class="pa-5">
             <v-row>
               <v-col>
-                <v-row>
-                  <v-col>img</v-col>
-                  <v-col>text</v-col>
-                </v-row>
-                <v-row>
-                  <v-col></v-col>
-                  <v-col>text</v-col>
-                </v-row>
+                <v-card class="d-flex align-center" flat>  
+                  <box-icon name='wind' size="md"></box-icon>
+                  <div class="ml-2">
+                    <p class="mb-0 text-body-1 font-weight-regular">Wind</p>
+                    <p class="mb-0 text-body-2 grey--text text--darken-1">2 m/s</p>
+                  </div>
+                </v-card>
               </v-col>
-              <v-col>2</v-col>
+              <v-col>
+                <v-card class="d-flex align-center" flat>  
+                  <box-icon name='sun' size="md"></box-icon>
+                  <div class="ml-2">
+                    <p class="mb-0 text-body-1 font-weight-regular">Index UV</p>
+                    <p class="mb-0 text-body-2 grey--text text--darken-1">2</p>
+                  </div>
+                </v-card>
+              </v-col>
             </v-row>
             <v-row>
-              <v-col>3</v-col>
-              <v-col>4</v-col>
+              <v-col>
+                <v-card class="d-flex align-center" flat>  
+                  <box-icon name='hive' size="md"></box-icon>
+                  <div class="ml-2">
+                    <p class="mb-0 text-body-1 font-weight-regular">Feels like</p>
+                    <p class="mb-0 text-body-2 grey--text text--darken-1">-30ºC</p>
+                  </div>
+                </v-card>
+              </v-col>
+              <v-col>
+                <v-card class="d-flex align-center" flat>  
+                  <box-icon name='tachometer' size="md" type="regular"></box-icon>
+                  <div class="ml-2">
+                    <p class="mb-0 text-body-1 font-weight-regular">Pressure</p>
+                    <p class="mb-0 text-body-2 grey--text text--darken-1">1000 mbar</p>
+                  </div>
+                </v-card>
+              </v-col>
             </v-row>
               
           </v-container>
