@@ -1,70 +1,16 @@
 <template>
-  <v-app>
-    <v-main class="d-flex align-center grey main">
-      <v-container class="d-flex justify-center">
-        <v-card class="px-2 px-md-5  py-7 rounded-lg" min-width="300px" width="375px" style="position: relative;"> 
-          <div class="d-flex justify-flex-start align-center rounded grey lighten-3 pa-2">
-            <box-icon name='search-alt-2' size="sm" color="grey"></box-icon>
-            <input type="text" placeholder="enter the city..." class="ml-2 input">
-          </div>
-          <div class="d-flex align-center justify-space-between mt-3">
-            <h1 class="text-h5 font-weight-medium">Astana, <span class="text-body-1 font-weight-light">Kazakhstan</span></h1>
-            <box-icon name='heart'></box-icon>
-          </div>
-          <v-card class="text-center mt-12" flat>
-            <i class='bx bx-cloud'></i>
-            <p class="text-h5 font-weight-medium mb-0">Cloudy</p>
-            <p class="grey--text mb-0">Thursday, 09 Nov</p>
-            <p class="mt-3 text-h4 font-weight-regular">-20ºC</p>
-          </v-card>
-          <v-container class="pa-xs-0 pa-md-5">
-            <v-row>
-              <v-col>
-                <v-card class="d-flex align-center" flat>  
-                  <box-icon name='wind' size="md"></box-icon>
-                  <div class="ml-2">
-                    <p class="mb-0 text-body-1 text-md-h6 font-weight-regular">Wind</p>
-                    <p class="mb-0 text-body-2 text-md-body-1 grey--text text--darken-1">2 m/s</p>
-                  </div>
-                </v-card>
-              </v-col>
-              <v-col>
-                <v-card class="d-flex align-center" flat>  
-                  <box-icon name='sun' size="md"></box-icon>
-                  <div class="ml-2">
-                    <p class="mb-0 text-body-1 text-md-h6 font-weight-regular">Index UV</p>
-                    <p class="mb-0 text-body-2 text-md-body-1 grey--text text--darken-1">2</p>
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-card class="d-flex align-center" flat>  
-                  <box-icon name='hive' size="md"></box-icon>
-                  <div class="ml-2">
-                    <p class="mb-0 text-body-1 text-md-h6 font-weight-regular">Feels like</p>
-                    <p class="mb-0 text-body-2 text-md-body-1 grey--text text--darken-1">-30ºC</p>
-                  </div>
-                </v-card>
-              </v-col>
-              <v-col>
-                <v-card class="d-flex align-center" flat>  
-                  <box-icon name='tachometer' size="md" type="regular"></box-icon>
-                  <div class="ml-2">
-                    <p class="mb-0 text-body-1 text-md-h6 font-weight-regular">Pressure</p>
-                    <p class="mb-0 text-body-2 text-md-body-1 grey--text text--darken-1">1000 mbar</p>
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
-
-          
-        </v-card>
-      </v-container>
-    </v-main>
-  </v-app>
+  <div class="app">
+    <div class="app__container">
+      <div class="search">
+        <i class='bx bx-search search__icon'></i>
+        <input class="search__input" placeholder="enter the city...">
+      </div>
+      <div class="header">
+        <h2 class="header__title">Astana, <span class="header__subtitle">Kazakhstan</span></h2>
+        <button class="header__btn"><i class='bx bx-heart'></i></button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -82,17 +28,82 @@ export default {
 };
 </script>
 
-<style scoped>
-  .main{
-    background: linear-gradient(300.44deg, #99EDFF 14.12%, #ACD682 85.06%);;
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  *{
+    box-sizing: border-box;
   }
 
- .input{
-   width: 100%;
-   outline: none;
- }
+  :root{
+    font-size: 10px;
+    --sm-bd-rd: 5px;
+    --md-bd-rd: 10px;
+  }
 
- .bx-cloud{
-   font-size: 96px;
- }
+  body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(300.44deg, #99EDFF 14.12%, #ACD682 85.06%);
+    font-size: 1.6rem;
+  }
+
+  .app{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app__container{
+    background: #ffffff;
+    border-radius: var(--md-bd-rd);
+    padding: 3rem 2rem;
+    width: 375px;
+  }
+
+  .search{
+    display: flex;
+    align-items: center;
+    background: #F4F4F4;
+    padding: 0.5rem;
+    border-radius: var(--sm-bd-rd);
+    
+  }
+
+  .search__icon{
+    color: grey;
+    font-size: 2rem;
+  }
+
+  .search__input{
+    margin-left: 0.5rem;
+    outline: none;
+    width: 100%;
+  }
+
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+
+  .header__title{
+    font-weight: 500;
+  }
+  
+  .header__subtitle{
+    font-weight: 300;
+    font-size: 1.8rem;
+  }
+
+  .header__btn{
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+  }
+
+
+  
+  
 </style>
