@@ -45,6 +45,11 @@
           </div>
         </div>
       </div>
+      <div class="navigation">
+        <div class="navigation__item active"><i class='bx bx-home' ></i></div>
+        <div class="navigation__item"><i class='bx bx-list-ul' ></i></div>
+        <div class="navigation__item"><i class='bx bx-heart' ></i></div>
+      </div>
     </div>
   </div>
 </template>
@@ -97,6 +102,8 @@ export default {
     padding: 3rem 2rem;
     min-width: 300px;
     width: 375px;
+    height: 670px;
+    position: relative;
   }
 
   .search{
@@ -172,7 +179,7 @@ export default {
     padding: 0 30px;
     row-gap: 20px;
     column-gap: 20px;
-    margin-top: 15px;
+    margin-top: 25px;
   }
 
   .extra-info__card{
@@ -195,6 +202,33 @@ export default {
     font-weight: 300;
     color: #707070;
   }
+
+  .navigation{
+    position: absolute;
+    display: flex;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+
+  }
+
+  .navigation__item{
+    cursor: pointer;
+  }
+
+  .navigation__item i{
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 28px;
+  }
+
+  .navigation__item.active i{
+    background:#72EB9B;
+    color: #ffffff;
+  }
+
+  
 
 
   
