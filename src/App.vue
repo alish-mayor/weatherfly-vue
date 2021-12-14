@@ -101,8 +101,8 @@ export default {
     border-radius: var(--md-bd-rd);
     padding: 3rem 2rem;
     min-width: 300px;
-    width: 375px;
-    height: 670px;
+    width: 37.5rem;
+    height: 67rem;
     position: relative;
   }
 
@@ -143,24 +143,24 @@ export default {
   }
 
   .header__btn{
-    width: 24px;
-    height: 24px;
-    font-size: 20px;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 2rem;
   }
 
   .main-info{
     text-align: center;
-    margin-top: 50px;
+    margin-top: 5rem;
   }
 
   .main-info__icon{
-    font-size: 96px;
+    font-size: 9.6rem;
   }
 
   .main-info__title{
-    margin-top: -15px;
+    margin-top: -1.5rem;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1.8rem;
   }
 
   .main-info__subtitle{
@@ -169,17 +169,17 @@ export default {
 
   .main-info__temp{
     font-weight: 500;
-    font-size: 36px;
-    margin-top: 10px;
+    font-size: 3.6rem;
+    margin-top: 1rem;
   }
 
   .extra-info{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0 30px;
-    row-gap: 20px;
-    column-gap: 20px;
-    margin-top: 25px;
+    padding: 0 3rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    margin-top: 2.5rem;
   }
 
   .extra-info__card{
@@ -189,12 +189,12 @@ export default {
   }
 
   .card__icon{
-    font-size: 30px;
-    margin-right: 10px;
+    font-size: 3rem;
+    margin-right: 1rem;
   }
 
   .card__title{
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 300;
   }
 
@@ -206,7 +206,7 @@ export default {
   .navigation{
     position: absolute;
     display: flex;
-    bottom: 30px;
+    bottom: 3rem;
     left: 0;
     right: 0;
     justify-content: space-around;
@@ -218,14 +218,20 @@ export default {
   }
 
   .navigation__item i{
-    padding: 10px;
+    padding: 1rem;
     border-radius: 50%;
-    font-size: 28px;
+    font-size: 2.8rem;
   }
 
   .navigation__item.active i{
     background:#72EB9B;
     color: #ffffff;
+  }
+
+  @media (min-width: 320px) and (max-width: 350px) {
+    :root{
+      font-size: 8px;
+    }
   }
 
   
