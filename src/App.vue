@@ -2,7 +2,8 @@
   <div class="app">
     <div class="app__container">
       <!-- <home></home> -->
-      <days-list></days-list>
+      <!-- <days-list></days-list> -->
+      <favourites></favourites>
       <div class="navigation">
         <div class="navigation__item active"><i class='bx bx-home' ></i></div>
         <div class="navigation__item"><i class='bx bx-list-ul' ></i></div>
@@ -15,13 +16,15 @@
 <script>
 
 // import home from './components/Home.vue'
-import daysList from './components/DaysList.vue'
+// import daysList from './components/DaysList.vue'
+import favourites from './components/Favourites.vue'
 
 export default {
   name: "App",
   components: {
     // home
-    daysList
+    // daysList
+    favourites
   },
 
   data: () => ({
