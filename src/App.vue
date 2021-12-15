@@ -1,13 +1,11 @@
 <template>
   <div class="app">
     <div class="app__container">
-      <!-- <home></home> -->
-      <!-- <days-list></days-list> -->
-      <favourites></favourites>
-      <div class="navigation">
-        <div class="navigation__item active"><i class='bx bx-home' ></i></div>
-        <div class="navigation__item"><i class='bx bx-list-ul' ></i></div>
-        <div class="navigation__item"><i class='bx bx-heart' ></i></div>
+      <router-view></router-view>
+      <div class="navigation" @click="changeActive($event)">
+        <div class="navigation__item"><router-link to="/"><i class='bx bx-home active' ></i></router-link></div>
+        <div class="navigation__item"><router-link to="/days"><i class='bx bx-list-ul' ></i></router-link></div>
+        <div class="navigation__item"><router-link to="/favourites"><i class='bx bx-heart' ></i></router-link></div>
       </div>
     </div>
   </div>
@@ -15,21 +13,22 @@
 
 <script>
 
-// import home from './components/Home.vue'
-// import daysList from './components/DaysList.vue'
-import favourites from './components/Favourites.vue'
+
 
 export default {
   name: "App",
   components: {
-    // home
-    // daysList
-    favourites
   },
 
   data: () => ({
     //
   }),
+  methods: {
+    changeActive(e){
+      console.log(e.target.parentNode);
+      // e.target.classList.add('active');
+    }
+  }
 };
 </script>
 
@@ -84,13 +83,17 @@ export default {
     cursor: pointer;
   }
 
+  .navigation__item a{
+    color: inherit;
+  }
+
   .navigation__item i{
     padding: 1rem;
     border-radius: 50%;
     font-size: 2.8rem;
   }
 
-  .navigation__item.active i{
+  .navigation__item i.active{
     background:#72EB9B;
     color: #ffffff;
   }
