@@ -25,6 +25,7 @@ export default {
   }),
   methods: {
     changeActive(e){
+      if(!e.target.classList.contains('navigation__icon')) return;
       const navLinks = document.querySelectorAll('.navigation__icon');
       navLinks.forEach(link => {
         link.classList.remove('active');
