@@ -3,9 +3,9 @@
     <div class="app__container">
       <router-view></router-view>
       <div class="navigation" @click="changeActive($event)">
-        <div class="navigation__item"><router-link to="/"><i class='bx bx-home active' ></i></router-link></div>
-        <div class="navigation__item"><router-link to="/days"><i class='bx bx-list-ul' ></i></router-link></div>
-        <div class="navigation__item"><router-link to="/favourites"><i class='bx bx-heart' ></i></router-link></div>
+        <div class="navigation__item"><router-link to="/"><i class='bx bx-home navigation__icon active' ></i></router-link></div>
+        <div class="navigation__item"><router-link to="/days"><i class='bx bx-list-ul navigation__icon' ></i></router-link></div>
+        <div class="navigation__item"><router-link to="/favourites"><i class='bx bx-heart navigation__icon' ></i></router-link></div>
       </div>
     </div>
   </div>
@@ -25,8 +25,11 @@ export default {
   }),
   methods: {
     changeActive(e){
-      console.log(e.target.parentNode);
-      // e.target.classList.add('active');
+      const navLinks = document.querySelectorAll('.navigation__icon');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+      })
+      e.target.classList.add('active');
     }
   }
 };
