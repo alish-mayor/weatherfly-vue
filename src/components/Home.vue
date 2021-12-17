@@ -9,7 +9,7 @@
         <button class="header__btn"><i class='bx bx-heart'></i></button>
       </div>
       <div class="main-info">
-        <i class='bx bx-cloud main-info__icon'></i>
+        <i class='bx main-info__icon' :class="weatherIcon"></i>
         <h4 class="main-info__title">{{ data.weather[0].main }}</h4>
         <p class="main-info__subtitle">Thursday, 09 Nov</p>
         <h3 class="main-info__temp">{{ transToCelsius(data.main.temp) }}</h3>
@@ -54,7 +54,8 @@ export default({
         return{
           API_KEY: '8d4a78af5654c729225221369eb116f4',
           data: {},
-          currentCity: 'Astana'
+          currentCity: 'Astana',
+          weatherIcon: 'bx-cloud'
         }
     },
     methods: {
@@ -64,6 +65,7 @@ export default({
           this.data = await response.json();
           console.log(this.data);
           this.getTime();
+          this.getIcon();
         } catch(error){
           console.log(error);
         }
@@ -77,6 +79,29 @@ export default({
         console.log(time.getDay());
         console.log(time.getDate());
         console.log(time.getMonth());
+      },
+      getIcon(){
+        const weatherDesc = this.data.weather[0].main;
+        switch (weatherDesc){
+          case 'Snow':
+          this.weatherIcon = "bx-cloud-snow"
+          break;
+          case 'Clear':
+          this.weatherIcon = "bx-sun"
+          break;
+          case 'Rain':
+          this.weatherIcon = "bx-cloud-rain"
+          break;
+          case 'Thunderstorm':
+          this.weatherIcon = "bx-cloud-lightning"
+          break;
+          case 'Clouds':
+          this.weatherIcon = "bx-cloud"
+          break;
+          case 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Dust' || 'Ash' || 'Squall' || 'Tornado'  : 
+          this.weatherIcon = "bx-water"
+          break;
+        }
       }
 
 
@@ -141,7 +166,7 @@ export default({
   }
 
   .main-info__title{
-    margin-top: -1.5rem;
+    margin-top: -0.5rem;
     font-weight: 400;
     font-size: 1.8rem;
   }
