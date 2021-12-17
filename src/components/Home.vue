@@ -2,15 +2,15 @@
     <div class="home">
         <div class="search">
         <i class='bx bx-search search__icon'></i>
-        <input class="search__input" placeholder="enter the city...">
+        <input class="search__input" placeholder="enter the city..." v-model="currentCity" @keydown.enter="getData(currentCity)">
       </div>
       <div class="header">
-        <h2 class="header__title">Astana, <span class="header__subtitle">Kazakhstan</span></h2>
+        <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
         <button class="header__btn"><i class='bx bx-heart'></i></button>
       </div>
       <div class="main-info">
         <i class='bx bx-cloud main-info__icon'></i>
-        <h4 class="main-info__title">Cloudy</h4>
+        <h4 class="main-info__title">{{ data.weather[0].main }}</h4>
         <p class="main-info__subtitle">Thursday, 09 Nov</p>
         <h3 class="main-info__temp">{{ transToCelsius(data.main.temp) }}</h3>
       </div>
@@ -54,13 +54,16 @@ export default({
         return{
           API_KEY: '8d4a78af5654c729225221369eb116f4',
           data: {},
+          currentCity: 'Astana'
         }
     },
     methods: {
-      async getData(){
+      async getData(city){
         try{
-          let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London&appid=${this.API_KEY}`);
+          let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
+          console.log(this.data);
+          this.getTime();
         } catch(error){
           console.log(error);
         }
@@ -68,16 +71,20 @@ export default({
       transToCelsius(temp) {
        return `${(temp - 273.15).toFixed(2)}ºC`;
       },
+      getTime(){
+        const time = new Date();
+
+        console.log(time.getDay());
+        console.log(time.getDate());
+        console.log(time.getMonth());
+      }
+
 
     },
     created(){
-      this.getData();
+      this.getData(this.currentCity);
     },
-    computed:{
-      temp(){
-        return this.data.main.temp;
-      }
-    }
+    
 })
 </script>
 
