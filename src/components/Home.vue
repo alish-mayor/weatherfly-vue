@@ -12,35 +12,35 @@
         <i class='bx bx-cloud main-info__icon'></i>
         <h4 class="main-info__title">Cloudy</h4>
         <p class="main-info__subtitle">Thursday, 09 Nov</p>
-        <h3 class="main-info__temp">-20ºC</h3>
+        <h3 class="main-info__temp">{{ transToCelsius(data.main.temp) }}</h3>
       </div>
       <div class="extra-info">
         <div class="extra-info__card">
           <i class='bx bx-wind card__icon'></i>
           <div>
             <h4 class="card__title">Wind</h4>
-            <p class="card__subtitle">2 m/s</p>
+            <p class="card__subtitle">{{data.wind.speed.toFixed(0)}} m/s</p>
           </div>
         </div>
         <div class="extra-info__card">
-          <i class='bx bx-sun card__icon'></i>
+          <i class='bx bx-droplet card__icon'></i>
           <div>
-            <h4 class="card__title">Index UV</h4>
-            <p class="card__subtitle">2</p>
+            <h4 class="card__title">Humidity</h4>
+            <p class="card__subtitle">{{ data.main.humidity}}%</p>
           </div>
         </div>
         <div class="extra-info__card">
           <i class='bx bxs-thermometer card__icon' ></i>
           <div>
             <h4 class="card__title">Feels like</h4>
-            <p class="card__subtitle">-30ºC</p>
+            <p class="card__subtitle">{{ transToCelsius(data.main.feels_like)}}</p>
           </div>
         </div>
         <div class="extra-info__card">
           <i class='bx bx-arrow-to-bottom card__icon'></i>
           <div>
             <h4 class="card__title">Pressure</h4>
-            <p class="card__subtitle">1000 mbar</p>
+            <p class="card__subtitle">{{ data.main.pressure }}mbar</p>
           </div>
         </div>
       </div>
@@ -52,8 +52,31 @@ export default({
     name: 'Home',
     data() {
         return{
-
+          API_KEY: '8d4a78af5654c729225221369eb116f4',
+          data: {},
         }
+    },
+    methods: {
+      async getData(){
+        try{
+          let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London&appid=${this.API_KEY}`);
+          this.data = await response.json();
+        } catch(error){
+          console.log(error);
+        }
+      },
+      transToCelsius(temp) {
+       return `${(temp - 273.15).toFixed(2)}ºC`;
+      },
+
+    },
+    created(){
+      this.getData();
+    },
+    computed:{
+      temp(){
+        return this.data.main.temp;
+      }
     }
 })
 </script>
