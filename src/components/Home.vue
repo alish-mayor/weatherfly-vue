@@ -11,7 +11,7 @@
       <div class="main-info">
         <i class='bx main-info__icon' :class="weatherIcon"></i>
         <h4 class="main-info__title">{{ data.weather[0].main }}</h4>
-        <p class="main-info__subtitle">Thursday, 09 Nov</p>
+        <p class="main-info__subtitle">{{ getTime() }}</p>
         <h3 class="main-info__temp">{{ transToCelsius(data.main.temp) }}</h3>
       </div>
       <div class="extra-info">
@@ -63,8 +63,6 @@ export default({
         try{
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
-          console.log(this.data);
-          this.getTime();
           this.getIcon();
         } catch(error){
           console.log(error);
@@ -74,11 +72,20 @@ export default({
        return `${(temp - 273.15).toFixed(2)}ºC`;
       },
       getTime(){
-        const time = new Date();
-
-        console.log(time.getDay());
-        console.log(time.getDate());
-        console.log(time.getMonth());
+        const time = new Date().toDateString().split(' ');
+        const month = time[1];
+        const date = time[2];
+        const weekDay = new Date().getDay();
+        const weekDays = {
+          0: 'Sunday',
+          1: 'Monday',
+          2: 'Tuesday',
+          3: 'Wednesday',
+          4: 'Thursday',
+          5: 'Friday',
+          6: 'Saturday',
+        }
+        return `${weekDays[weekDay]}, ${date} ${month}`
       },
       getIcon(){
         const weatherDesc = this.data.weather[0].main;
@@ -103,11 +110,10 @@ export default({
           break;
         }
       }
-
-
     },
-    created(){
+    mounted(){
       this.getData(this.currentCity);
+      this.getTime();
     },
     
 })

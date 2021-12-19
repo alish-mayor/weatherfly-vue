@@ -65,7 +65,7 @@ export default {
         align-items: center;
         justify-content: space-around;
         flex-wrap: wrap;
-        height: 500px;
+        height: 50rem;
         overflow-x: hidden;
         overflow-y: auto;
         padding: 10px;
@@ -95,11 +95,4 @@ export default {
     .card__country{
         color: #999999;
     }
-
-    @media (min-width: 320px) and (max-width: 350px) {
-    .favourites-collection{
-        height: 400px;
-    }
-  }
-    
 </style>
