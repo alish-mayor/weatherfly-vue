@@ -4,7 +4,7 @@
         <i class='bx bx-search search__icon'></i>
         <input class="search__input" placeholder="enter the city..." v-model="cityInput" @keydown.enter="getData(cityInput)">
       </div>
-      <div class="content" v-if="currentCity">
+      <div class="content" v-if="dataLoaded">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
         <button class="header__btn"><i class='bx bx-heart'></i></button>
@@ -57,18 +57,21 @@ export default({
           API_KEY: '8d4a78af5654c729225221369eb116f4',
           data: {},
           cityInput: '',
-          weatherIcon: 'bx-cloud'
+          weatherIcon: 'bx-cloud',
+          dataLoaded: false,
         }
     },
     methods: {
       async getData(city){
         if (!city) return;
         try{
+          this.dataLoaded = false;
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
           this.getIcon();
           if (this.cityInput.length > 0) this.$store.commit('changeCity', this.cityInput);
           this.cityInput = '';
+          this.dataLoaded = true;
         } catch(error){
           console.log(error);
         }
