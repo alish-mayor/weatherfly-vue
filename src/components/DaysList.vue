@@ -1,32 +1,13 @@
 <template>
     <div class="days-list">
-        <h2 class="title">Astana, <span class="subtitle">Kazakhstan</span></h2>
+        <h2 class="title">Astana <span class="subtitle">Kazakhstan</span></h2>
         <ul class="list">
-            <li class="list__item">
-                <i class='bx bx-sun list__item__icon'></i>
-                <p class="list__item__day">Friday, <span class="list__item__date">10 Nov</span></p>
-                <p class="list__item__temp">-15ºC</p>
+            <li v-for="item in daysList" class="list__item" :key="item.id">
+                <i class='bx bx-sun list__item__icon'>{{item.icon}}</i>
+                <p class="list__item__day"> {{item.date}} <span class="list__item__date"></span></p>
+                <p class="list__item__temp">{{ item.temp }}</p>
             </li>
-            <li class="list__item">
-                <i class='bx bx-cloud list__item__icon'></i>
-                <p class="list__item__day">Saturday, <span class="list__item__date">11 Nov</span></p>
-                <p class="list__item__temp">-20ºC</p>
-            </li>
-            <li class="list__item">
-                <i class='bx bx-sun list__item__icon'></i>
-                <p class="list__item__day">Sunday, <span class="list__item__date">10 Nov</span></p>
-                <p class="list__item__temp">-15ºC</p>
-            </li>
-            <li class="list__item">
-                <i class='bx bx-sun list__item__icon'></i>
-                <p class="list__item__day">Wednesday, <span class="list__item__date">10 Nov</span></p>
-                <p class="list__item__temp">-15ºC</p>
-            </li>
-            <li class="list__item">
-                <i class='bx bx-sun list__item__icon'></i>
-                <p class="list__item__day">Monday, <span class="list__item__date">10 Nov</span></p>
-                <p class="list__item__temp">-15ºC</p>
-            </li>
+            
         </ul>
     </div>
 </template>
@@ -36,7 +17,25 @@ export default {
     name: 'DaysList',
     data(){
         return{
-
+            daysList: [
+            {
+                id: 10499310,
+                icon: 'Cloud',
+                date: 'Friday, 10 Nov',
+                temp: '-15ºC'
+            },
+            {
+                id: 104993219,
+                icon: 'Sun',
+                date: 'Saturday, 11 Nov',
+                temp: '-10ºC'
+            },
+            ]
+        }
+    },
+    computed: {
+        currentCity(){
+            return this.$store.state.currentCity;
         }
     }
 }
