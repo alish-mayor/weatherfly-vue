@@ -4,6 +4,7 @@
         <i class='bx bx-search search__icon'></i>
         <input class="search__input" placeholder="enter the city..." v-model="cityInput" @keydown.enter="getData(cityInput)">
       </div>
+      <div class="content" v-if="currentCity">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
         <button class="header__btn"><i class='bx bx-heart'></i></button>
@@ -45,6 +46,7 @@
         </div>
       </div>
     </div>
+    </div>
 </template>
 
 <script>
@@ -66,6 +68,7 @@ export default({
           this.data = await response.json();
           this.getIcon();
           if (this.cityInput.length > 0) this.$store.commit('changeCity', this.cityInput);
+          this.cityInput = '';
         } catch(error){
           console.log(error);
         }
@@ -114,10 +117,14 @@ export default({
       }
     },
     mounted(){
-      this.getData(this.$store.state.currentCity);
+      this.getData(this.currentCity);
       this.getTime();
     },
-    
+    computed: {
+      currentCity(){
+        return this.$store.state.currentCity;
+      }
+    }
 })
 </script>
 

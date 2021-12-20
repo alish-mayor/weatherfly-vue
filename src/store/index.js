@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentCity: "Astana",
+    currentCity: "",
   },
   mutations: {
     changeCity(state, city) {
