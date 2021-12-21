@@ -105,6 +105,10 @@ export default {
     .list{
         list-style-type: none;
         margin-top: 2.3rem;
+        padding: 0.5rem;
+        height: 50rem;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .list__item{
