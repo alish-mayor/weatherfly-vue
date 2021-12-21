@@ -3,9 +3,9 @@
         <div class="content" v-if="dataLoaded">
         <h2 class="title">Astana <span class="subtitle">Kazakhstan</span></h2>
         <ul class="list">
-            <li v-for="item in daysList" class="list__item" :key="item.dt">
+            <li v-for="(item, index) in daysList" class="list__item" :key="item.dt">
                 <i class='bx list__item__icon' :class="getIcon(item.weather[0].main)"></i>
-                <p class="list__item__day"> {{item.date}} <span class="list__item__date"></span></p>
+                <p class="list__item__day"> {{ getWeekDay(index) }}, <span class="list__item__date"> {{ getDate(index) }}</span></p>
                 <p class="list__item__temp">{{ transToCelsius(item.temp.day) }}</p>
             </li>
         </ul>
@@ -40,7 +40,6 @@ export default {
           let response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=51.1801&lon=71.446&exclude=current,minutely,hourly&appid=8d4a78af5654c729225221369eb116f4`);
           this.data = await response.json();
           this.daysList = this.data.daily;
-          console.log(this.daysList);
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
@@ -65,6 +64,29 @@ export default {
             return "bx-water" 
         }
       },
+      getDate(index){
+        const miliseconds = Date.now() + (86400000 * index);
+        const time = new Date(miliseconds).toDateString().split(' ');
+        const month = time[1];
+        const date = time[2];
+        
+        return `${date} ${month}`
+      },
+      getWeekDay(index){
+        const miliseconds = Date.now() + (86400000 * index);
+        const weekDays = {
+          0: 'Sunday',
+          1: 'Monday',
+          2: 'Tuesday',
+          3: 'Wednesday',
+          4: 'Thursday',
+          5: 'Friday',
+          6: 'Saturday',
+        }
+        const weekDay = new Date(miliseconds).getDay();
+        
+        return `${weekDays[weekDay]}`
+      }
     }
 }
 </script>
