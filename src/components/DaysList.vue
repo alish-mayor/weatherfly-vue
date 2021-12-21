@@ -3,10 +3,10 @@
         <div class="content" v-if="dataLoaded">
         <h2 class="title">Astana <span class="subtitle">Kazakhstan</span></h2>
         <ul class="list">
-            <li v-for="item in daysList" class="list__item" :key="item.id">
-                <i class='bx bx-sun list__item__icon'>{{item.icon}}</i>
+            <li v-for="item in daysList" class="list__item" :key="item.dt">
+                <i class='bx bx-sun list__item__icon'>{{item.weather[0].main}}</i>
                 <p class="list__item__day"> {{item.date}} <span class="list__item__date"></span></p>
-                <p class="list__item__temp">{{ item.temp }}</p>
+                <p class="list__item__temp">{{ transToCelsius(item.temp.day) }}</p>
             </li>
         </ul>
         </div>
@@ -20,7 +20,7 @@ export default {
         return{
             API_KEY: '8d4a78af5654c729225221369eb116f4',
             dataLoaded: false,
-            dataList: [],
+            daysList: [],
             data: {},
         }
     },
@@ -30,21 +30,25 @@ export default {
         }
     },
     mounted(){
-        this.getData(this.currentCity);
+        this.getData();
     },
     methods: {
-        async getData(city){
-        if (!city) return;
+        async getData(){
+        // if (!city) return;
         try{
           this.dataLoaded = false;
-          let response = await fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&appid=${this.API_KEY}`);
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=51.1801&lon=71.446&exclude=current,minutely,hourly&appid=8d4a78af5654c729225221369eb116f4`);
           this.data = await response.json();
-          console.log(this.data);
+          this.daysList = this.data.daily;
+          console.log(this.daysList);
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
         }
-      }
+      },
+      transToCelsius(temp) {
+       return `${(temp - 273.15).toFixed(2)}ºC`;
+      },
     }
 }
 </script>
