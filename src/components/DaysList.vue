@@ -4,7 +4,7 @@
         <h2 class="title">Astana <span class="subtitle">Kazakhstan</span></h2>
         <ul class="list">
             <li v-for="item in daysList" class="list__item" :key="item.dt">
-                <i class='bx bx-sun list__item__icon'>{{item.weather[0].main}}</i>
+                <i class='bx list__item__icon' :class="getIcon(item.weather[0].main)"></i>
                 <p class="list__item__day"> {{item.date}} <span class="list__item__date"></span></p>
                 <p class="list__item__temp">{{ transToCelsius(item.temp.day) }}</p>
             </li>
@@ -48,6 +48,22 @@ export default {
       },
       transToCelsius(temp) {
        return `${(temp - 273.15).toFixed(2)}ºC`;
+      },
+      getIcon(weatherDesc){
+        switch (weatherDesc){
+          case 'Snow':
+          return "bx-cloud-snow"
+          case 'Clear':
+          return "bx-sun"
+          case 'Rain':
+          return "bx-cloud-rain"
+          case 'Thunderstorm':
+          return "bx-cloud-lightning"
+          case 'Clouds':
+          return "bx-cloud"
+          default:
+            return "bx-water" 
+        }
       },
     }
 }
