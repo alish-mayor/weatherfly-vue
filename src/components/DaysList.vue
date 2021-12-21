@@ -50,6 +50,8 @@ export default {
       },
       getIcon(weatherDesc){
         switch (weatherDesc){
+          case 'Drizzle':
+          return "bx-cloud-drizzle"
           case 'Snow':
           return "bx-cloud-snow"
           case 'Clear':

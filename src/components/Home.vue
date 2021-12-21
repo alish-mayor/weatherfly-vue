@@ -71,7 +71,6 @@ export default({
           this.getIcon();
           if (this.cityInput.length > 0) this.$store.commit('changeCity', this.cityInput);
           this.cityInput = '';
-          console.log(this.data);
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
@@ -99,6 +98,9 @@ export default({
       getIcon(){
         const weatherDesc = this.data.weather[0].main;
         switch (weatherDesc){
+          case 'Drizzle':
+            this.weatherIcon = "bx-cloud-drizzle"
+            break;
           case 'Snow':
           this.weatherIcon = "bx-cloud-snow"
           break;
@@ -114,7 +116,7 @@ export default({
           case 'Clouds':
           this.weatherIcon = "bx-cloud"
           break;
-          case 'Mist' || 'Smoke' || 'Haze' || 'Dust' || 'Fog' || 'Sand' || 'Dust' || 'Ash' || 'Squall' || 'Tornado'  : 
+          default:
           this.weatherIcon = "bx-water"
           break;
         }
