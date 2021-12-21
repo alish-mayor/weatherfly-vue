@@ -71,6 +71,7 @@ export default({
           this.getIcon();
           if (this.cityInput.length > 0) this.$store.commit('changeCity', this.cityInput);
           this.cityInput = '';
+          console.log(this.data);
           this.dataLoaded = true;
         } catch(error){
           console.log(error);

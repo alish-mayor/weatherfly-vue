@@ -1,5 +1,6 @@
 <template>
     <div class="days-list">
+        <div class="content" v-if="dataLoaded">
         <h2 class="title">Astana <span class="subtitle">Kazakhstan</span></h2>
         <ul class="list">
             <li v-for="item in daysList" class="list__item" :key="item.id">
@@ -7,8 +8,8 @@
                 <p class="list__item__day"> {{item.date}} <span class="list__item__date"></span></p>
                 <p class="list__item__temp">{{ item.temp }}</p>
             </li>
-            
         </ul>
+        </div>
     </div>
 </template>
 
@@ -17,26 +18,33 @@ export default {
     name: 'DaysList',
     data(){
         return{
-            daysList: [
-            {
-                id: 10499310,
-                icon: 'Cloud',
-                date: 'Friday, 10 Nov',
-                temp: '-15ºC'
-            },
-            {
-                id: 104993219,
-                icon: 'Sun',
-                date: 'Saturday, 11 Nov',
-                temp: '-10ºC'
-            },
-            ]
+            API_KEY: '8d4a78af5654c729225221369eb116f4',
+            dataLoaded: false,
+            dataList: [],
+            data: {},
         }
     },
     computed: {
         currentCity(){
             return this.$store.state.currentCity;
         }
+    },
+    mounted(){
+        this.getData(this.currentCity);
+    },
+    methods: {
+        async getData(city){
+        if (!city) return;
+        try{
+          this.dataLoaded = false;
+          let response = await fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&appid=${this.API_KEY}`);
+          this.data = await response.json();
+          console.log(this.data);
+          this.dataLoaded = true;
+        } catch(error){
+          console.log(error);
+        }
+      }
     }
 }
 </script>
