@@ -68,10 +68,10 @@ export default({
           this.dataLoaded = false;
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
-          this.getIcon();
-          if (this.cityInput.length > 0) this.$store.commit('changeCity', this.cityInput);
-          this.cityInput = '';
           this.dataLoaded = true;
+          this.getIcon();
+          this.changeCity();
+          this.cityInput = '';
         } catch(error){
           console.log(error);
         }
@@ -120,10 +120,19 @@ export default({
           this.weatherIcon = "bx-water"
           break;
         }
+      },
+      changeCity(){
+        if (this.cityInput.length > 0) this.$store.commit('changeCity', 
+          {
+            cityName: this.data.name,
+            country: this.data.sys.country,
+            lat: this.data.coord.lat,
+            lon: this.data.coord.lon,
+          });
       }
     },
     mounted(){
-      this.getData(this.currentCity);
+      this.getData(this.currentCity.cityName);
       this.getTime();
     },
     computed: {
