@@ -1,5 +1,6 @@
 <template>
     <div class="days-list">
+        <div class="load-overlay" v-if="(!dataLoaded) && currentCity.cityName"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="content" v-if="dataLoaded">
         <h2 class="title">{{ this.currentCity.cityName }}, <span class="subtitle"> {{ this.currentCity.country }} </span></h2>
         <ul class="list">
@@ -131,4 +132,24 @@ export default {
     .list__item__date{
         color: #999999;
     }
+
+    .days-list{
+    position: relative;
+    height: 100%;
+  }
+
+  .load-overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .load-overlay__icon{
+    font-size: 3rem;
+  }
 </style>

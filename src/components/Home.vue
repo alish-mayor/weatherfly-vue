@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+      <div class="load-overlay" v-if="(!dataLoaded) && currentCity.cityName"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="search">
         <i class='bx bx-search search__icon'></i>
         <input class="search__input" placeholder="enter the city..." v-model="cityInput" @keydown.enter="getData(cityInput)">
@@ -239,5 +240,25 @@ export default({
   .card__subtitle{
     font-weight: 300;
     color: #707070;
+  }
+
+  .home{
+    position: relative;
+    height: 100%;
+  }
+
+  .load-overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .load-overlay__icon{
+    font-size: 3rem;
   }
 </style>
