@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <div class="load-overlay" v-if="(!dataLoaded) && currentCity.cityName"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
+      <div class="load-overlay" v-if="loading"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="search">
         <i class='bx bx-search search__icon'></i>
         <input class="search__input" placeholder="enter the city..." v-model="cityInput" @keydown.enter="getData(cityInput)">
@@ -60,15 +60,18 @@ export default({
           cityInput: '',
           weatherIcon: 'bx-cloud',
           dataLoaded: false,
+          loading: false,
         }
     },
     methods: {
       async getData(city){
         if (!city) return;
         try{
+          this.loading = true;
           this.dataLoaded = false;
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
+          this.loading = false;
           this.dataLoaded = true;
           this.getIcon();
           this.changeCity();

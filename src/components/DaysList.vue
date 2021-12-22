@@ -1,6 +1,6 @@
 <template>
     <div class="days-list">
-        <div class="load-overlay" v-if="(!dataLoaded) && currentCity.cityName"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
+        <div class="load-overlay" v-if="loading"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="content" v-if="dataLoaded">
         <h2 class="title">{{ this.currentCity.cityName }}, <span class="subtitle"> {{ this.currentCity.country }} </span></h2>
         <ul class="list">
@@ -21,8 +21,10 @@ export default {
         return{
             API_KEY: '8d4a78af5654c729225221369eb116f4',
             dataLoaded: false,
+            loading: false,
             daysList: [],
             data: {},
+            
         }
     },
     computed: {
@@ -37,10 +39,12 @@ export default {
         async getData(city){
         if (!city) return;
         try{
+            this.loading = true;
           this.dataLoaded = false;
           let response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.currentCity.lat}&lon=${this.currentCity.lon}&exclude=current,minutely,hourly&appid=${this.API_KEY}`);
           this.data = await response.json();
           this.daysList = this.data.daily;
+          this.loading = false;
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
