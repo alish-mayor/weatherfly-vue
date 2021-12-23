@@ -2,41 +2,11 @@
     <div class="favourites">
          <h2 class="title">Favourites</h2>
          <div class="favourites-collection">
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-15ºC</p>
-                 <p class="card__city">Astana</p>
-                 <p class="card__country">Kazakhstan</p>
-             </div>
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-20ºC</p>
-                 <p class="card__city">Moscow</p>
-                 <p class="card__country">Russia</p>
-             </div>
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-15ºC</p>
-                 <p class="card__city">Astana</p>
-                 <p class="card__country">Kazakhstan</p>
-             </div>
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-15ºC</p>
-                 <p class="card__city">Astana</p>
-                 <p class="card__country">Kazakhstan</p>
-             </div>
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-15ºC</p>
-                 <p class="card__city">Astana</p>
-                 <p class="card__country">Kazakhstan</p>
-             </div>
-             <div class="card">
-                 <i class='bx bx-cloud card__icon'></i>
-                 <p class="card__temp">-20ºC</p>
-                 <p class="card__city">Moscow</p>
-                 <p class="card__country">Russia</p>
+             <div class="card" v-for="(item,index) in favouritesList" :key="index">
+                 <i class='bx card__icon' :class="getIcon(item.icon)"></i>
+                 <p class="card__temp">{{ item.temp }}</p>
+                 <p class="card__city">{{ item.cityName }}</p>
+                 <p class="card__country">{{ item.country }}</p>
              </div>
          </div>
     </div>
@@ -49,6 +19,31 @@ export default {
         return{
 
         }
+    },
+    computed: {
+        favouritesList(){
+            return this.$store.state.favourites;
+        }
+    },
+    methods: {
+        getIcon(weatherDesc){
+        switch (weatherDesc){
+          case 'Drizzle':
+          return "bx-cloud-drizzle"
+          case 'Snow':
+          return "bx-cloud-snow"
+          case 'Clear':
+          return "bx-sun"
+          case 'Rain':
+          return "bx-cloud-rain"
+          case 'Thunderstorm':
+          return "bx-cloud-lightning"
+          case 'Clouds':
+          return "bx-cloud"
+          default:
+            return "bx-water" 
+        }
+      },
     }
 }
 </script>
@@ -62,7 +57,7 @@ export default {
 
     .favourites-collection{
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-around;
         flex-wrap: wrap;
         height: 50rem;

@@ -8,7 +8,7 @@
       <div class="content" v-if="dataLoaded">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
-        <button class="header__btn"><i class='bx bx-heart'></i></button>
+        <button class="header__btn" @click="addToFavourite"><i class='bx bx-heart'></i></button>
       </div>
       <div class="main-info">
         <i class='bx main-info__icon' :class="weatherIcon"></i>
@@ -133,6 +133,17 @@ export default({
             lat: this.data.coord.lat,
             lon: this.data.coord.lon,
           });
+      },
+      addToFavourite(){
+        this.$store.commit('addFavourite', 
+        {
+          cityName: this.data.name,
+          country: this.data.sys.country,
+          icon: this.data.weather[0].main,
+          temp: this.transToCelsius(this.data.main.temp),
+        }
+        )
+        console.log(this.$store.state.favourites);
       }
     },
     mounted(){
