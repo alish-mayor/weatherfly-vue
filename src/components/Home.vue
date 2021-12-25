@@ -133,14 +133,14 @@ export default({
             country: this.data.sys.country,
             lat: this.data.coord.lat,
             lon: this.data.coord.lon,
-            favourited: this.tapped,
           });
       },
       addToFavourite(){
-        this.$store.commit('addFavourite', this.data.name);
-
-        console.log(this.$store.state.favourites);
-        this.tapped = !this.tapped;
+        if(this.favouritesList.includes(this.data.name)){
+          this.$store.commit('deleteFavourite', this.favouritesList.indexOf(this.data.name));
+        } else{
+          this.$store.commit('addFavourite', this.data.name);
+        }
       }
     },
     mounted(){
@@ -151,9 +151,12 @@ export default({
       currentCity(){
         return this.$store.state.currentCity;
       },
+      favouritesList(){
+        return this.$store.state.favourites;
+      },
       favourited(){
-        return this.tapped ? 'bxs-heart active' : 'bx-heart';
-      }
+        return this.favouritesList.includes(this.data.name) ? 'bxs-heart active' : 'bx-heart';
+      },
     }
 })
 </script>

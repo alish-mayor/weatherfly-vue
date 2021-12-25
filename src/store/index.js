@@ -15,6 +15,9 @@ export default new Vuex.Store({
     addFavourite(state, city) {
       state.favourites.push(city);
     },
+    deleteFavourite(state, index) {
+      state.favourites.splice(index, 1);
+    },
   },
   actions: {},
   modules: {},
