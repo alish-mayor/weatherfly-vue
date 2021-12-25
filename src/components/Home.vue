@@ -8,7 +8,7 @@
       <div class="content" v-if="dataLoaded">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
-        <button class="header__btn" @click="addToFavourite"><i class='bx bx-heart'></i></button>
+        <button @click="addToFavourite"><i class='bx header__icon' :class="favourited"></i></button>
       </div>
       <div class="main-info">
         <i class='bx main-info__icon' :class="weatherIcon"></i>
@@ -61,6 +61,7 @@ export default({
           weatherIcon: 'bx-cloud',
           dataLoaded: false,
           loading: false,
+          tapped: false,
         }
     },
     methods: {
@@ -132,18 +133,14 @@ export default({
             country: this.data.sys.country,
             lat: this.data.coord.lat,
             lon: this.data.coord.lon,
+            favourited: this.tapped,
           });
       },
       addToFavourite(){
-        this.$store.commit('addFavourite', 
-        {
-          cityName: this.data.name,
-          country: this.data.sys.country,
-          icon: this.data.weather[0].main,
-          temp: this.transToCelsius(this.data.main.temp),
-        }
-        )
+        this.$store.commit('addFavourite', this.data.name);
+
         console.log(this.$store.state.favourites);
+        this.tapped = !this.tapped;
       }
     },
     mounted(){
@@ -153,6 +150,9 @@ export default({
     computed: {
       currentCity(){
         return this.$store.state.currentCity;
+      },
+      favourited(){
+        return this.tapped ? 'bxs-heart active' : 'bx-heart';
       }
     }
 })
@@ -195,10 +195,14 @@ export default({
     font-size: 1.8rem;
   }
 
-  .header__btn{
+  .header__icon{
     width: 2.4rem;
     height: 2.4rem;
     font-size: 2rem;
+  }
+
+  .header__icon.active{
+    color: red;
   }
 
   .main-info{
