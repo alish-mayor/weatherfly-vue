@@ -8,15 +8,16 @@
 </template>
 
 <script>
-
+import apiKey from '../apiKey.js';
 
 export default({
+
     name: 'FavouriteCard',
     data(){
         return{
             dataLoaded: false,
             data: {},
-            API_KEY: '8d4a78af5654c729225221369eb116f4',
+            API_KEY: apiKey,
         }
     },
     props:{
