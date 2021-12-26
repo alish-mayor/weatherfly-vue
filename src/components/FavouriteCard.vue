@@ -66,10 +66,10 @@ export default({
 
 <style scoped>
     .card{
-        width: 42%;
+        width: 40%;
         text-align: center;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
-        padding: 1.5rem 1.5rem;
+        padding: 1.5rem 0;
         border-radius: var(--sm-bd-rd);
         margin-top: 2.5rem;
     }
@@ -83,7 +83,7 @@ export default({
     }
 
     .card__city{
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     .card__country{

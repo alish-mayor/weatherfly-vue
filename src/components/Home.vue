@@ -2,13 +2,14 @@
     <div class="home">
       <div class="load-overlay" v-if="loading"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="search">
-        <i class='bx bx-search search__icon'></i>
-        <input class="search__input" placeholder="enter the city..." v-model="cityInput" @keydown.enter="getData(cityInput)">
-      </div>
+          <i class='bx bx-search search__icon'></i>
+          <input class="search__input" placeholder="enter the city..." @input="isError = false" v-model="cityInput" @keydown.enter="getData(cityInput)">
+        </div>
+        <p style="color: red" v-if="isError">Nothing found. Please try again.</p>
       <div class="content" v-if="dataLoaded">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
-        <button @click="addToFavourite"><i class='bx header__icon' :class="favourited"></i></button>
+        <button @click="favouriteCity"><i class='bx header__icon' :class="favourited"></i></button>
       </div>
       <div class="main-info">
         <i class='bx main-info__icon' :class="weatherIcon"></i>
@@ -62,6 +63,7 @@ export default({
           dataLoaded: false,
           loading: false,
           tapped: false,
+          isError: false,
         }
     },
     methods: {
@@ -71,9 +73,16 @@ export default({
           this.loading = true;
           this.dataLoaded = false;
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
+          if(!response.ok){
+              this.loading = false;
+              this.dataLoaded = false;
+              this.isError = true;
+              throw new Error('Nothing found...');
+          }
           this.data = await response.json();
           this.loading = false;
           this.dataLoaded = true;
+          this.isError = false;
           this.getIcon();
           this.changeCity();
           this.cityInput = '';
@@ -135,7 +144,7 @@ export default({
             lon: this.data.coord.lon,
           });
       },
-      addToFavourite(){
+      favouriteCity(){
         if(this.favouritesList.includes(this.data.name)){
           this.$store.commit('deleteFavourite', this.favouritesList.indexOf(this.data.name));
         } else{
@@ -281,5 +290,9 @@ export default({
 
   .load-overlay__icon{
     font-size: 3rem;
+  }
+
+  .error{
+    color: red;
   }
 </style>
