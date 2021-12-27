@@ -1,9 +1,10 @@
 <template>
-        <div class="card" v-if="dataLoaded">
+        <div class="card" v-if="dataLoaded" @click="getFavourite">
                  <i class='bx card__icon' :class="getIcon(data.weather[0].main)"></i>
                  <p class="card__temp">{{ transToCelsius(data.main.temp) }}</p>
                  <p class="card__city">{{ data.name }}</p>
                  <p class="card__country">{{ data.sys.country }}</p>
+            <router-link class="link" to="/" ></router-link>
         </div>
 </template>
 
@@ -56,6 +57,24 @@ export default({
       },
       transToCelsius(temp) {
        return `${(temp - 273.15).toFixed(2)}ºC`;
+      },
+      getFavourite(){
+        this.changeCity();
+          const navLinks = document.querySelectorAll('.navigation__icon');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            })
+          const link = document.querySelector('.navigation__icon');
+          link.classList.add('active');
+      },
+      changeCity(){
+        this.$store.commit('changeCity', 
+          {
+            cityName: this.data.name,
+            country: this.data.sys.country,
+            lat: this.data.coord.lat,
+            lon: this.data.coord.lon,
+          });
       }
     },
     mounted(){
@@ -67,6 +86,7 @@ export default({
 
 <style scoped>
     .card{
+        position: relative;
         width: 40%;
         text-align: center;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
@@ -92,4 +112,11 @@ export default({
         font-size: 1.4rem;
     }
    
+    .link{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 </style>

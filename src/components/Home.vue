@@ -5,7 +5,7 @@
           <i class='bx bx-search search__icon'></i>
           <input class="search__input" placeholder="enter the city..." @input="isError = false" v-model="cityInput" @keydown.enter="getData(cityInput)">
         </div>
-        <p style="color: red" v-if="isError">Nothing found. Please try again.</p>
+        <p style="color: red" v-if="isError">Nothing found. Please enter correct city.</p>
       <div class="content" v-if="dataLoaded">
       <div class="header">
         <h2 class="header__title">{{ data.name }}, <span class="header__subtitle">{{ data.sys.country }}</span></h2>
@@ -155,8 +155,12 @@ export default({
       }
     },
     mounted(){
-      this.getData(this.currentCity.cityName);
-      this.getTime();
+      setTimeout(() => {
+        console.log('load');
+        this.getData(this.currentCity.cityName);
+        this.getTime();
+      }, 100);
+      
     },
     computed: {
       currentCity(){
