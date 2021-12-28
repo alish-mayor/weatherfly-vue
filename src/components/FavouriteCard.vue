@@ -33,7 +33,6 @@ export default({
           console.log(error);
         }
       },
-      
       getFavourite(){
         this.changeCity();
           const navLinks = document.querySelectorAll('.navigation__icon');
@@ -43,15 +42,6 @@ export default({
           const link = document.querySelector('.navigation__icon');
           link.classList.add('active');
       },
-      changeCity(){
-        this.$store.commit('changeCity', 
-          {
-            cityName: this.data.name,
-            country: this.data.sys.country,
-            lat: this.data.coord.lat,
-            lon: this.data.coord.lon,
-          });
-      }
     },
     mounted(){
         this.getData(this.favCity);

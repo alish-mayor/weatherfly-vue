@@ -61,7 +61,6 @@ export default({
     data() {
         return{
           cityInput: '',
-          tapped: false,
           isError: false,
         }
     },
@@ -83,13 +82,12 @@ export default({
           this.loading = false;
           this.dataLoaded = true;
           this.isError = false;
-          this.changeCity();
+          if (this.cityInput.length > 0) this.changeCity();
           this.cityInput = '';
         } catch(error){
           console.log(error);
         }
       },
-      
       getTime(){
         const time = new Date().toDateString().split(' ');
         const month = time[1];
@@ -106,15 +104,6 @@ export default({
         }
         return `${weekDays[weekDay]}, ${date} ${month}`
       },
-      changeCity(){
-        if (this.cityInput.length > 0) this.$store.commit('changeCity', 
-          {
-            cityName: this.data.name,
-            country: this.data.sys.country,
-            lat: this.data.coord.lat,
-            lon: this.data.coord.lon,
-          });
-      },
       favouriteCity(){
         if(this.favouritesList.includes(this.data.name)){
           this.$store.commit('deleteFavourite', this.favouritesList.indexOf(this.data.name));
@@ -128,7 +117,6 @@ export default({
         this.getData(this.currentCity.cityName);
         this.getTime();
       }, 100);
-      
     },
     computed: {
       favouritesList(){

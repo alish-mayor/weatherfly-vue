@@ -18,14 +18,17 @@
 export default {
   name: "App",
   components: {
-  },
 
+  },
   data: () => ({
-    //
+    
   }),
   methods: {
     changeActive(e){
       if(!e.target.classList.contains('navigation__icon')) return;
+      this.activateTab(e);
+    },
+    activateTab(e){
       const navLinks = document.querySelectorAll('.navigation__icon');
       navLinks.forEach(link => {
         link.classList.remove('active');
@@ -115,6 +118,17 @@ export default {
 
   .load-overlay__icon{
     font-size: 3rem;
+  }
+
+  .title{
+        text-align: center;
+        font-weight: 500;
+        font-size: 2.2rem;
+  }
+
+  .subtitle{
+        font-weight: 300;
+        font-size: 1.6rem;
   }
 
   @media (min-width: 320px) and (max-width: 350px) {

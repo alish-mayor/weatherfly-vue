@@ -29,12 +29,6 @@ export default {
 </script>
 
 <style scoped>
-    .title{
-        text-align: center;
-        font-weight: 500;
-        font-size: 2.2rem;
-    }
-
     .favourites-collection{
         margin-top: 2rem;
         display: grid;
@@ -47,6 +41,4 @@ export default {
         overflow-y: auto;
         padding: 10px;
     }
-
-    
 </style>

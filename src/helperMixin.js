@@ -31,6 +31,14 @@ export const helperMixin = {
           return "bx-water";
       }
     },
+    changeCity() {
+      this.$store.commit("changeCity", {
+        cityName: this.data.name,
+        country: this.data.sys.country,
+        lat: this.data.coord.lat,
+        lon: this.data.coord.lon,
+      });
+    },
   },
   computed: {
     currentCity() {

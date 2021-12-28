@@ -71,16 +71,6 @@ export default {
 </script>
 
 <style scoped>
-    .title{
-        text-align: center;
-        font-weight: 500;
-        font-size: 2.2rem;
-    }
-    .subtitle{
-        font-weight: 300;
-        font-size: 1.6rem;
-    }
-
     .list{
         list-style-type: none;
         margin-top: 2.3rem;
