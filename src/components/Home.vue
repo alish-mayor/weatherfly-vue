@@ -93,7 +93,7 @@ export default({
         }
       },
       transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(2)}ºC`;
+       return `${(temp - 273.15).toFixed(0)}ºC`;
       },
       getTime(){
         const time = new Date().toDateString().split(' ');
@@ -156,7 +156,6 @@ export default({
     },
     mounted(){
       setTimeout(() => {
-        console.log('load');
         this.getData(this.currentCity.cityName);
         this.getTime();
       }, 100);

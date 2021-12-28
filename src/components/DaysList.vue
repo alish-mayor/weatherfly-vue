@@ -6,7 +6,7 @@
         <ul class="list">
             <li v-for="(item, index) in daysList" class="list__item" :key="item.dt">
                 <i class='bx list__item__icon' :class="getIcon(item.weather[0].main)"></i>
-                <p class="list__item__day"> {{ getWeekDay(index + 1) }}, <span class="list__item__date"> {{ getDate(index + 1) }}</span></p>
+                <p class="list__item__day"> {{ getWeekDay(index) }}, <span class="list__item__date"> {{ getDate(index) }}</span></p>
                 <p class="list__item__temp">{{ transToCelsius(item.temp.day) }}</p>
             </li>
         </ul>
@@ -53,7 +53,7 @@ export default {
         }
       },
       transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(2)}ºC`;
+       return `${(temp - 273.15).toFixed(0)}ºC`;
       },
       getIcon(weatherDesc){
         switch (weatherDesc){

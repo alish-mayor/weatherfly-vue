@@ -56,7 +56,7 @@ export default({
         }
       },
       transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(2)}ºC`;
+       return `${(temp - 273.15).toFixed(0)}ºC`;
       },
       getFavourite(){
         this.changeCity();
@@ -87,12 +87,11 @@ export default({
 <style scoped>
     .card{
         position: relative;
-        width: 40%;
+        width: 80%;
         text-align: center;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
         padding: 1.5rem 0;
         border-radius: var(--sm-bd-rd);
-        margin-top: 2.5rem;
     }
 
     .card__icon{

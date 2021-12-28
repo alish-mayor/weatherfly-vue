@@ -36,10 +36,12 @@ export default {
     }
 
     .favourites-collection{
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-around;
-        flex-wrap: wrap;
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 16rem;
+        row-gap: 2.5rem;
+        justify-items: center;
         height: 50rem;
         overflow-x: hidden;
         overflow-y: auto;
