@@ -15,25 +15,16 @@
 </template>
 
 <script>
-import apiKey from '../apiKey.js';
+import helperMixin from '../helperMixin.js';
 
 export default {
     name: 'DaysList',
     data(){
         return{
-            API_KEY: apiKey,
-            dataLoaded: false,
-            loading: false,
             daysList: [],
-            data: {},
-            
         }
     },
-    computed: {
-        currentCity(){
-            return this.$store.state.currentCity;
-        }
-    },
+    mixins: [helperMixin],
     mounted(){
         this.getData(this.currentCity.cityName);
     },
@@ -50,27 +41,6 @@ export default {
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
-        }
-      },
-      transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(0)}ºC`;
-      },
-      getIcon(weatherDesc){
-        switch (weatherDesc){
-          case 'Drizzle':
-          return "bx-cloud-drizzle"
-          case 'Snow':
-          return "bx-cloud-snow"
-          case 'Clear':
-          return "bx-sun"
-          case 'Rain':
-          return "bx-cloud-rain"
-          case 'Thunderstorm':
-          return "bx-cloud-lightning"
-          case 'Clouds':
-          return "bx-cloud"
-          default:
-            return "bx-water" 
         }
       },
       getDate(index){
@@ -142,20 +112,5 @@ export default {
     .days-list{
     position: relative;
     height: 100%;
-  }
-
-  .load-overlay{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .load-overlay__icon{
-    font-size: 3rem;
   }
 </style>

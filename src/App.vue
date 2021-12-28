@@ -102,6 +102,21 @@ export default {
     color: #ffffff;
   }
 
+  .load-overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .load-overlay__icon{
+    font-size: 3rem;
+  }
+
   @media (min-width: 320px) and (max-width: 350px) {
     :root{
       font-size: 8px;

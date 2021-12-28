@@ -9,40 +9,19 @@
 </template>
 
 <script>
-import apiKey from '../apiKey.js';
+import helperMixin from '../helperMixin.js';
 
 export default({
-
     name: 'FavouriteCard',
     data(){
         return{
-            dataLoaded: false,
-            data: {},
-            API_KEY: apiKey,
         }
     },
+    mixins: [helperMixin],
     props:{
         favCity: String,
     },
     methods: {
-        getIcon(weatherDesc){
-        switch (weatherDesc){
-          case 'Drizzle':
-          return "bx-cloud-drizzle"
-          case 'Snow':
-          return "bx-cloud-snow"
-          case 'Clear':
-          return "bx-sun"
-          case 'Rain':
-          return "bx-cloud-rain"
-          case 'Thunderstorm':
-          return "bx-cloud-lightning"
-          case 'Clouds':
-          return "bx-cloud"
-          default:
-            return "bx-water" 
-        }
-      },
       async getData(city){
         if (!city) return;
         try{
@@ -50,14 +29,11 @@ export default({
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
           this.dataLoaded = true;
-          this.getIcon();
         } catch(error){
           console.log(error);
         }
       },
-      transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(0)}ºC`;
-      },
+      
       getFavourite(){
         this.changeCity();
           const navLinks = document.querySelectorAll('.navigation__icon');

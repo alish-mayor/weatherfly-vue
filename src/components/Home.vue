@@ -12,7 +12,7 @@
         <button @click="favouriteCity"><i class='bx header__icon' :class="favourited"></i></button>
       </div>
       <div class="main-info">
-        <i class='bx main-info__icon' :class="weatherIcon"></i>
+        <i class='bx main-info__icon' :class="getIcon(data.weather[0].main)"></i>
         <h4 class="main-info__title">{{ data.weather[0].main }}</h4>
         <p class="main-info__subtitle">{{ getTime() }}</p>
         <h3 class="main-info__temp">{{ transToCelsius(data.main.temp) }}</h3>
@@ -52,22 +52,20 @@
 </template>
 
 <script>
-import apiKey from '../apiKey.js';
+import helperMixin from "../helperMixin";
+
+
 
 export default({
     name: 'Home',
     data() {
         return{
-          API_KEY: apiKey,
-          data: {},
           cityInput: '',
-          weatherIcon: 'bx-cloud',
-          dataLoaded: false,
-          loading: false,
           tapped: false,
           isError: false,
         }
     },
+    mixins: [helperMixin],
     methods: {
       async getData(city){
         if (!city) return;
@@ -85,16 +83,13 @@ export default({
           this.loading = false;
           this.dataLoaded = true;
           this.isError = false;
-          this.getIcon();
           this.changeCity();
           this.cityInput = '';
         } catch(error){
           console.log(error);
         }
       },
-      transToCelsius(temp) {
-       return `${(temp - 273.15).toFixed(0)}ºC`;
-      },
+      
       getTime(){
         const time = new Date().toDateString().split(' ');
         const month = time[1];
@@ -110,32 +105,6 @@ export default({
           6: 'Saturday',
         }
         return `${weekDays[weekDay]}, ${date} ${month}`
-      },
-      getIcon(){
-        const weatherDesc = this.data.weather[0].main;
-        switch (weatherDesc){
-          case 'Drizzle':
-            this.weatherIcon = "bx-cloud-drizzle"
-            break;
-          case 'Snow':
-          this.weatherIcon = "bx-cloud-snow"
-          break;
-          case 'Clear':
-          this.weatherIcon = "bx-sun"
-          break;
-          case 'Rain':
-          this.weatherIcon = "bx-cloud-rain"
-          break;
-          case 'Thunderstorm':
-          this.weatherIcon = "bx-cloud-lightning"
-          break;
-          case 'Clouds':
-          this.weatherIcon = "bx-cloud"
-          break;
-          default:
-          this.weatherIcon = "bx-water"
-          break;
-        }
       },
       changeCity(){
         if (this.cityInput.length > 0) this.$store.commit('changeCity', 
@@ -162,9 +131,6 @@ export default({
       
     },
     computed: {
-      currentCity(){
-        return this.$store.state.currentCity;
-      },
       favouritesList(){
         return this.$store.state.favourites;
       },
@@ -280,21 +246,6 @@ export default({
   .home{
     position: relative;
     height: 100%;
-  }
-
-  .load-overlay{
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .load-overlay__icon{
-    font-size: 3rem;
   }
 
   .error{
