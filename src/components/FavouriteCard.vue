@@ -1,10 +1,13 @@
 <template>
-        <div class="card" v-if="dataLoaded" @click="getFavourite">
-                 <i class='bx card__icon' :class="getIcon(data.weather[0].main)"></i>
+        <div class="card"  @click="getFavourite">
+           <div class="load-overlay" v-if="loading"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
+           <div class="card__content" v-if="dataLoaded">
+                <i class='bx card__icon' :class="getIcon(data.weather[0].main)"></i>
                  <p class="card__temp">{{ transToCelsius(data.main.temp) }}</p>
                  <p class="card__city">{{ data.name }}</p>
                  <p class="card__country">{{ data.sys.country }}</p>
-            <router-link class="link" to="/" ></router-link>
+            </div>
+            <router-link class="link" to="/"></router-link>  
         </div>
 </template>
 
@@ -26,8 +29,10 @@ export default({
         if (!city) return;
         try{
           this.dataLoaded = false;
+          this.loading = true;
           let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
+          this.loading = false;
           this.dataLoaded = true;
         } catch(error){
           console.log(error);
