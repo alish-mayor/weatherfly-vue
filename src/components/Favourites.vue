@@ -1,6 +1,7 @@
 <template>
     <div class="favourites">
          <h2 class="title">Favourites</h2>
+         <p class="caption" v-if="favouritesList.length < 1">You haven't any favourite city yet! Please add some!</p>
          <div class="favourites-collection">
              <favourite-card v-for="(city,index) in favouritesList" :key="index" :favCity="city"></favourite-card>
          </div>

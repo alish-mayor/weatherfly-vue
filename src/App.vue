@@ -131,6 +131,16 @@ export default {
         font-size: 1.6rem;
   }
 
+
+    .caption{
+    font-weight: 300;
+    color: #999999;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0 3rem;
+  }
+
+
   @media (min-width: 320px) and (max-width: 350px) {
     :root{
       font-size: 8px;

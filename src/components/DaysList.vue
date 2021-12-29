@@ -1,8 +1,10 @@
 <template>
     <div class="days-list">
+        <h2 class="title" v-if="checkEmpty(currentCity)">Forecast</h2>
+        <p class="caption" v-if="checkEmpty(currentCity)">To see the forecast please enter the city in home tab!</p>
+        <h2 class="title" v-if="!checkEmpty(currentCity)">{{ this.currentCity.cityName }}, <span class="subtitle"> {{ this.currentCity.country }} </span></h2>
         <div class="load-overlay" v-if="loading"><i class='bx bx-loader bx-spin load-overlay__icon'></i></div>
         <div class="content" v-if="dataLoaded">
-        <h2 class="title">{{ this.currentCity.cityName }}, <span class="subtitle"> {{ this.currentCity.country }} </span></h2>
         <ul class="list">
             <li v-for="(item, index) in daysList" class="list__item" :key="item.dt">
                 <i class='bx list__item__icon' :class="getIcon(item.weather[0].main)"></i>
@@ -65,6 +67,9 @@ export default {
         const weekDay = new Date(miliseconds).getDay();
         
         return `${weekDays[weekDay]}`
+      },
+      checkEmpty(object){
+        return Object.keys(object).length === 0 && object.constructor === Object;
       }
     }
 }
