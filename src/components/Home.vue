@@ -71,7 +71,7 @@ export default({
         try{
           this.loading = true;
           this.dataLoaded = false;
-          let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           if(!response.ok){
               this.loading = false;
               this.dataLoaded = false;

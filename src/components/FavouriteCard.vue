@@ -30,7 +30,7 @@ export default({
         try{
           this.dataLoaded = false;
           this.loading = true;
-          let response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
+          let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.API_KEY}`);
           this.data = await response.json();
           this.loading = false;
           this.dataLoaded = true;
